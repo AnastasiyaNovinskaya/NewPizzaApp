@@ -3,7 +3,7 @@ package Models;
 public class IngredientType {
     private int id;
     private String name;
-    private double price;
+    private double ingredientPrice;
     private String ImageUrl;
 
     public int getId() {
@@ -23,11 +23,11 @@ public class IngredientType {
     }
 
     public double getPrice() {
-        return price;
+        return ingredientPrice;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setPrice(double ingredientPrice) {
+        this.ingredientPrice = ingredientPrice;
     }
 
     public String getImageUrl() {

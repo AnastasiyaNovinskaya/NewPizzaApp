@@ -7,15 +7,13 @@ import Util.DBConfiguration;
 import java.sql.*;
 import java.util.ArrayList;
 
-
 public class Repository {
-    Connection connection;
+    private Connection connection;
 
     public Repository() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(DBConfiguration.url, DBConfiguration.user, DBConfiguration.password);
-
         } catch (SQLException | ClassNotFoundException exception) {
             System.err.println("An error occurred: " + exception.getMessage());
         }
@@ -168,5 +166,21 @@ public class Repository {
             System.err.println("An error occurred: " + exception.getMessage());
         }
     }
+
+    // Method to get the connection
+    public Connection getConnection() {
+        return connection;
+    }
+
+    public void closeConnection() {
+        try {
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
