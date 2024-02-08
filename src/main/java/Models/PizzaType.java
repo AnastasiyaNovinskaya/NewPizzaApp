@@ -7,7 +7,7 @@ package Models;
         private double pizzaPrice;
         private String imageUrl;
 
-        private int pizzaQuantity; 
+        private int pizzaQuantity;
 
         public int getId() {
             return id;
