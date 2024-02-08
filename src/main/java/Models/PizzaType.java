@@ -4,7 +4,7 @@ package Models;
         private int id;
         private String name;
         private String description;
-        private double price;
+        private double pizzaPrice;
         private String imageUrl;
 
         public int getId() {
@@ -24,11 +24,11 @@ package Models;
         }
 
         public double getPrice() {
-            return price;
+            return pizzaPrice;
         }
 
-        public void setPrice(double price) {
-            this.price = price;
+        public void setPrice(double pizzaPrice) {
+            this.pizzaPrice = pizzaPrice;
         }
 
         public String getDescription() {
