@@ -47,7 +47,7 @@
         <tr>
             <td>
                 <label>
-                    <input type="checkbox" name="selectedPizzas" value="<%= pizza.getId() %>">
+                    <input type="checkbox" name="pizzaId" value="<%= pizza.getId() %>">
                     <b><%= pizza.getName() %></b>
                 </label>
             <td><%= pizza.getDescription() %></td>

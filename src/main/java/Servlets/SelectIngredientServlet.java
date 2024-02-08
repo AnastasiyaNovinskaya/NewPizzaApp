@@ -47,15 +47,17 @@ public class SelectIngredientServlet extends HttpServlet {
         String[] selectedIngredients = request.getParameterValues("selectedIngredients");
         if (selectedIngredients != null) {
             for (String ingredientId : selectedIngredients) {
-                request.getParameter("ingredientQuantity" + ingredientId);
+                String quantityParamName = "ingredientQuantity" + ingredientId;
+                int ingredientQuantity = Integer.parseInt(request.getParameter(quantityParamName));
                 IngredientType ingredientType = repository.getIngredientById(Integer.parseInt(ingredientId));
 
                 Connection connection = repository.getConnection();
 
                 try {
                     PizzaType pizzaType = repository.getPizzaById(Integer.parseInt(selectedPizzaId));
+                    double totalIngredientPrice = ingredientType.getPrice() * ingredientQuantity;
                     MenuItem menuItem = new MenuItem(connection, pizzaType, ingredientType, selectedPizzaId);
-                    menuItem.addOrder(ingredientType.getName(), ingredientType.getPrice(), pizzaType.getPrice());
+                    menuItem.addOrder(pizzaType.getName(), pizzaType.getPrice(), ingredientType.getName(), totalIngredientPrice);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
@@ -65,8 +67,4 @@ public class SelectIngredientServlet extends HttpServlet {
         response.sendRedirect(request.getContextPath() + "/welcome.jsp");
     }
 
-    @Override
-    public void destroy() {
-        repository.closeConnection();
-    }
 }

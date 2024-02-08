@@ -6,6 +6,8 @@ public class IngredientType {
     private double ingredientPrice;
     private String ImageUrl;
 
+    private int ingredientQuantity;
+
     public int getId() {
         return id;
     }
