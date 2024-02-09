@@ -56,8 +56,8 @@ public class SelectIngredientServlet extends HttpServlet {
                 try {
                     PizzaType pizzaType = repository.getPizzaById(Integer.parseInt(selectedPizzaId));
                     double totalIngredientPrice = ingredientType.getPrice() * ingredientQuantity;
-                    MenuItem menuItem = new MenuItem(connection, pizzaType, ingredientType, selectedPizzaId);
-                    menuItem.addOrder(pizzaType.getName(), pizzaType.getPrice(), ingredientType.getName(), totalIngredientPrice);
+                    MenuItem menuItem = new MenuItem(connection);
+                    menuItem.addOrder(pizzaType.getName(), pizzaType.getPrice(), ingredientQuantity, ingredientType.getName(), totalIngredientPrice);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
