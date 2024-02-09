@@ -20,15 +20,23 @@ public class SelectPizzaServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, ServletException {
+            throws IOException {
         String selectedPizzaId = request.getParameter("pizzaId");
         LOGGER.info("Selected Pizza ID: " + selectedPizzaId); // Print selected pizza ID to log
+        
+        // Retrieve the quantity of the selected pizza
+        String pizzaQuantityParam = request.getParameter("pizzaQuantity" + selectedPizzaId); // Modify parameter name
+        int pizzaQuantity = 0; // default value if parameter is null
+        if (pizzaQuantityParam != null && !pizzaQuantityParam.isEmpty()) {
+            pizzaQuantity = Integer.parseInt(pizzaQuantityParam);
+        }
 
-        // Store chosen values in log
-        LOGGER.info("Values chosen by you are stored: selectedPizzaId=" + selectedPizzaId);
 
+
+        // Store chosen values in session
         HttpSession session = request.getSession();
         session.setAttribute("selectedPizzaId", selectedPizzaId);
+        session.setAttribute("pizzaQuantity", pizzaQuantity); // Store pizza quantity in session
 
         response.sendRedirect(request.getContextPath() + "/selectIngredient");
     }
