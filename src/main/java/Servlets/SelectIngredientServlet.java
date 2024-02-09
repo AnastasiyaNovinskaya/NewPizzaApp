@@ -42,6 +42,7 @@ public class SelectIngredientServlet extends HttpServlet {
         // Retrieving selected pizza from session
         HttpSession session = request.getSession();
         String selectedPizzaId = (String) session.getAttribute("selectedPizzaId");
+        int pizzaQuantity = (int) session.getAttribute("pizzaQuantity"); // Adding this line
 
         // Handling ingredient selection
         String[] selectedIngredients = request.getParameterValues("selectedIngredients");
@@ -57,7 +58,7 @@ public class SelectIngredientServlet extends HttpServlet {
                     PizzaType pizzaType = repository.getPizzaById(Integer.parseInt(selectedPizzaId));
                     double totalIngredientPrice = ingredientType.getPrice() * ingredientQuantity;
                     MenuItem menuItem = new MenuItem(connection);
-                    menuItem.addOrder(pizzaType.getName(), pizzaType.getPrice(), ingredientQuantity, ingredientType.getName(), totalIngredientPrice);
+                    menuItem.addOrder(pizzaType.getName(), pizzaType.getPrice(), pizzaQuantity, ingredientType.getName(), totalIngredientPrice, ingredientQuantity);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
